@@ -1,0 +1,127 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+#Place Vagrantfile in the directory you run vagrant from.
+#This should also contain ubuntu.yml which configure VMs
+
+# setting for all VMs
+Vagrant.configure("2") do |config|
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2048
+    v.cpus = 2
+  config.ssh.insert_key = false
+  end
+
+  # specific for puppet
+  config.vm.define "puppet" do |puppet|
+    puppet.vm.box = "ubuntu/jammy64"
+    puppet.vm.hostname = "puppet"
+    puppet.vm.network "private_network", ip: "192.168.56.10"
+  end
+
+  # specific for node01
+  config.vm.define "node01" do |node01|
+    node01.vm.box = "ubuntu/jammy64"
+    node01.vm.hostname = "node01"
+    node01.vm.network "private_network", ip: "192.168.56.21"
+  end
+
+  # specific for node02
+  config.vm.define "node02" do |node02|
+    node02.vm.box = "ubuntu/jammy64"
+    node02.vm.hostname = "node02"
+    node02.vm.network "private_network", ip: "192.168.56.22"
+  end
+
+  # specific for node03
+  config.vm.define "node03" do |node03|
+    node03.vm.box = "centos/7"
+    node03.vm.hostname = "node03"
+    node03.vm.network "private_network", ip: "192.168.56.23"
+  end
+
+  # specific for pasture
+  config.vm.define "pasture" do |pasture|
+    pasture.vm.box = "centos/7"
+    pasture.vm.hostname = "pasture"
+    pasture.vm.network "private_network", ip: "192.168.56.112"
+  end
+
+  # specific for pasture-dev
+  config.vm.define "pasture_dev" do |pasture_dev|
+    pasture_dev.vm.box = "centos/7"
+    pasture_dev.vm.hostname = "pasture-dev"
+    pasture_dev.vm.network "private_network", ip: "192.168.56.113"
+  end
+
+  # specific for pasture-prod
+  config.vm.define "pasture_prod" do |pasture_prod|
+    pasture_prod.vm.box = "centos/7"
+    pasture_prod.vm.hostname = "pasture-prod"
+    pasture_prod.vm.network "private_network", ip: "192.168.56.114"
+  end
+
+  # specific for pasture-db
+  config.vm.define "pasture_db" do |pasture_db|
+    pasture_db.vm.box = "centos/7"
+    pasture_db.vm.hostname = "pasture-db"
+    pasture_db.vm.network "private_network", ip: "192.168.56.115"
+  end
+
+  # specific for pasture-app
+  config.vm.define "pasture_app" do |pasture_app|
+    pasture_app.vm.box = "centos/7"
+    pasture_app.vm.hostname = "pasture-app"
+    pasture_app.vm.network "private_network", ip: "192.168.56.116"
+  end    
+
+  # specific for pasture-app-micro
+  config.vm.define "pasture_app_micro" do |pasture_app_micro|
+    pasture_app_micro.vm.box = "centos/7"
+    pasture_app_micro.vm.hostname = "pasture-app-micro"
+    pasture_app_micro.vm.network "private_network", ip: "192.168.56.117"
+  end   
+
+  # specific for pasture-app-macro
+  config.vm.define "pasture_app_macro" do |pasture_app_macro|
+    pasture_app_macro.vm.box = "centos/7"
+    pasture_app_macro.vm.hostname = "pasture-app-macro"
+    pasture_app_macro.vm.network "private_network", ip: "192.168.56.118"
+  end   
+
+  # specific for pasture_app_marsupial
+  config.vm.define "pasture_app_marsupial" do |pasture_app_marsupial|
+    pasture_app_marsupial.vm.box = "centos/7"
+    pasture_app_marsupial.vm.hostname = "pasture-app.marsupial.loc"
+    pasture_app_marsupial.vm.network "private_network", ip: "192.168.56.119"
+  end  
+  
+  # specific for pasture-app-ren
+  config.vm.define "pasture_app_ren" do |pasture_app_ren|
+    pasture_app_ren.vm.box = "centos/7"
+    pasture_app_ren.vm.hostname = "pasture-app-ren"
+    pasture_app_ren.vm.network "private_network", ip: "192.168.56.120"
+  end 
+
+  # specific for pasture-app-ren
+  config.vm.define "pasture_app_stimpy" do |pasture_app_stimpy|
+    pasture_app_stimpy.vm.box = "centos/7"
+    pasture_app_stimpy.vm.hostname = "pasture-app-stimpy"
+    pasture_app_stimpy.vm.network "private_network", ip: "192.168.56.121"
+  end   
+
+  # specific for dbserver
+  config.vm.define "dbserver" do |dbserver|
+    dbserver.vm.box = "centos/7"
+    dbserver.vm.hostname = "dbserver"
+    dbserver.vm.network "private_network", ip: "192.168.56.223"
+  end
+
+  # specific for appserver
+  config.vm.define "appserver" do |appserver|
+    appserver.vm.box = "centos/7"
+    appserver.vm.hostname = "appserver"
+    appserver.vm.network "private_network", ip: "192.168.56.222"
+  end
+
+end
