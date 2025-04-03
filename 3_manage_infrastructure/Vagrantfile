@@ -33,6 +33,18 @@ Vagrant.configure("2") do |config|
     agt001.vm.network "private_network", ip: "192.168.56.21"
   end
 
+  config.vm.define "web001" do |web001|
+    web001.vm.box = "ubuntu/focal64"
+    web001.vm.hostname = "web001.globomantics.loc"
+    web001.vm.network "private_network", ip: "192.168.56.22"
+  end
+
+  config.vm.define "web002" do |web002|
+    web002.vm.box = "ubuntu/focal64"
+    web002.vm.hostname = "web002.globomantics.loc"
+    web002.vm.network "private_network", ip: "192.168.56.23"
+  end
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
