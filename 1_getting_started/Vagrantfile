@@ -10,6 +10,14 @@ Vagrant.configure("2") do |config|
     v.memory = 2048
     v.cpus = 2
   config.ssh.insert_key = false
+  # provisioner script to update repos only on CentOS boxes
+  config.vm.provision "shell", path: "scripts/update_centos_repos.sh"
+  config.vm.provision "shell" do |s|
+    s.inline = <<-SHELL
+      if [ -f /etc/centos-release ]; then
+        /vagrant/scripts/update_centos_repos.sh
+      fi
+    SHELL
   end
 
   # specific for puppet
@@ -73,42 +81,42 @@ Vagrant.configure("2") do |config|
     pasture_app.vm.box = "centos/7"
     pasture_app.vm.hostname = "pasture-app"
     pasture_app.vm.network "private_network", ip: "192.168.56.116"
-  end    
+  end
 
   # specific for pasture-app-micro
   config.vm.define "pasture_app_micro" do |pasture_app_micro|
     pasture_app_micro.vm.box = "centos/7"
     pasture_app_micro.vm.hostname = "pasture-app-micro"
     pasture_app_micro.vm.network "private_network", ip: "192.168.56.117"
-  end   
+  end
 
   # specific for pasture-app-macro
   config.vm.define "pasture_app_macro" do |pasture_app_macro|
     pasture_app_macro.vm.box = "centos/7"
     pasture_app_macro.vm.hostname = "pasture-app-macro"
     pasture_app_macro.vm.network "private_network", ip: "192.168.56.118"
-  end   
+  end
 
   # specific for pasture_app_marsupial
   config.vm.define "pasture_app_marsupial" do |pasture_app_marsupial|
     pasture_app_marsupial.vm.box = "centos/7"
     pasture_app_marsupial.vm.hostname = "pasture-app.marsupial.loc"
     pasture_app_marsupial.vm.network "private_network", ip: "192.168.56.119"
-  end  
-  
+  end
+
   # specific for pasture-app-ren
   config.vm.define "pasture_app_ren" do |pasture_app_ren|
     pasture_app_ren.vm.box = "centos/7"
     pasture_app_ren.vm.hostname = "pasture-app-ren"
     pasture_app_ren.vm.network "private_network", ip: "192.168.56.120"
-  end 
+  end
 
   # specific for pasture-app-ren
   config.vm.define "pasture_app_stimpy" do |pasture_app_stimpy|
     pasture_app_stimpy.vm.box = "centos/7"
     pasture_app_stimpy.vm.hostname = "pasture-app-stimpy"
     pasture_app_stimpy.vm.network "private_network", ip: "192.168.56.121"
-  end   
+  end
 
   # specific for dbserver
   config.vm.define "dbserver" do |dbserver|
