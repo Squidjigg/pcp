@@ -19,6 +19,7 @@ Vagrant.configure("2") do |config|
       fi
     SHELL
   end
+  end
 
   # specific for puppet
   config.vm.define "puppet" do |puppet|
