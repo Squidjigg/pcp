@@ -10,12 +10,15 @@ Vagrant.configure("2") do |config|
     v.memory = 2048
     v.cpus = 2
   config.ssh.insert_key = false
-  # provisioner script to update repos only on CentOS boxes
-  config.vm.provision "shell", inline: <<-SHELL
-    if [ -f /etc/centos-release ]; then
-      /vagrant/scripts/update_centos_repos.sh
-    fi
-  SHELL
+  end
+
+  def apply_centos_provisioner(config)
+    # provisioner script to update repos only on CentOS boxes
+    config.vm.provision "shell", inline: <<-SHELL
+      if [ -f /etc/centos-release ]; then
+        /vagrant/scripts/update_centos_repos.sh
+      fi
+    SHELL
   end
 
   # specific for puppet
@@ -44,6 +47,7 @@ Vagrant.configure("2") do |config|
     node03.vm.box = "centos/7"
     node03.vm.hostname = "node03"
     node03.vm.network "private_network", ip: "192.168.56.23"
+    apply_centos_provisioner(node03)
   end
 
   # specific for pasture
@@ -51,6 +55,7 @@ Vagrant.configure("2") do |config|
     pasture.vm.box = "centos/7"
     pasture.vm.hostname = "pasture"
     pasture.vm.network "private_network", ip: "192.168.56.112"
+    apply_centos_provisioner(pasture)
   end
 
   # specific for pasture-dev
@@ -58,6 +63,7 @@ Vagrant.configure("2") do |config|
     pasture_dev.vm.box = "centos/7"
     pasture_dev.vm.hostname = "pasture-dev"
     pasture_dev.vm.network "private_network", ip: "192.168.56.113"
+    apply_centos_provisioner(pasture_dev)
   end
 
   # specific for pasture-prod
@@ -65,6 +71,7 @@ Vagrant.configure("2") do |config|
     pasture_prod.vm.box = "centos/7"
     pasture_prod.vm.hostname = "pasture-prod"
     pasture_prod.vm.network "private_network", ip: "192.168.56.114"
+    apply_centos_provisioner(pasture_prod)
   end
 
   # specific for pasture-db
@@ -72,6 +79,7 @@ Vagrant.configure("2") do |config|
     pasture_db.vm.box = "centos/7"
     pasture_db.vm.hostname = "pasture-db"
     pasture_db.vm.network "private_network", ip: "192.168.56.115"
+    apply_centos_provisioner(pasture_db)
   end
 
   # specific for pasture-app
@@ -79,6 +87,7 @@ Vagrant.configure("2") do |config|
     pasture_app.vm.box = "centos/7"
     pasture_app.vm.hostname = "pasture-app"
     pasture_app.vm.network "private_network", ip: "192.168.56.116"
+    apply_centos_provisioner(pasture_app)
   end
 
   # specific for pasture-app-micro
@@ -86,6 +95,7 @@ Vagrant.configure("2") do |config|
     pasture_app_micro.vm.box = "centos/7"
     pasture_app_micro.vm.hostname = "pasture-app-micro"
     pasture_app_micro.vm.network "private_network", ip: "192.168.56.117"
+    apply_centos_provisioner(pasture_app_micro)
   end
 
   # specific for pasture-app-macro
@@ -93,6 +103,7 @@ Vagrant.configure("2") do |config|
     pasture_app_macro.vm.box = "centos/7"
     pasture_app_macro.vm.hostname = "pasture-app-macro"
     pasture_app_macro.vm.network "private_network", ip: "192.168.56.118"
+    apply_centos_provisioner(pasture_app_macro)
   end
 
   # specific for pasture_app_marsupial
@@ -100,6 +111,7 @@ Vagrant.configure("2") do |config|
     pasture_app_marsupial.vm.box = "centos/7"
     pasture_app_marsupial.vm.hostname = "pasture-app.marsupial.loc"
     pasture_app_marsupial.vm.network "private_network", ip: "192.168.56.119"
+    apply_centos_provisioner(pasture_app_marsupial)
   end
 
   # specific for pasture-app-ren
@@ -107,6 +119,7 @@ Vagrant.configure("2") do |config|
     pasture_app_ren.vm.box = "centos/7"
     pasture_app_ren.vm.hostname = "pasture-app-ren"
     pasture_app_ren.vm.network "private_network", ip: "192.168.56.120"
+    apply_centos_provisioner(pasture_app_ren)
   end
 
   # specific for pasture-app-ren
@@ -114,6 +127,7 @@ Vagrant.configure("2") do |config|
     pasture_app_stimpy.vm.box = "centos/7"
     pasture_app_stimpy.vm.hostname = "pasture-app-stimpy"
     pasture_app_stimpy.vm.network "private_network", ip: "192.168.56.121"
+    apply_centos_provisioner(pasture_app_stimpy)
   end
 
   # specific for dbserver
@@ -121,6 +135,7 @@ Vagrant.configure("2") do |config|
     dbserver.vm.box = "centos/7"
     dbserver.vm.hostname = "dbserver"
     dbserver.vm.network "private_network", ip: "192.168.56.223"
+    apply_centos_provisioner(dbserver)
   end
 
   # specific for appserver
@@ -128,6 +143,7 @@ Vagrant.configure("2") do |config|
     appserver.vm.box = "centos/7"
     appserver.vm.hostname = "appserver"
     appserver.vm.network "private_network", ip: "192.168.56.222"
+    apply_centos_provisioner(appserver)
   end
-
+  
 end
