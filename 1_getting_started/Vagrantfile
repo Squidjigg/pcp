@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
     v.cpus = 2
   config.ssh.insert_key = false
   # provisioner script to update repos only on CentOS boxes
-  config.vm.provision "shell", inline: = <<-SHELL
+  config.vm.provision "shell", inline: <<-SHELL
     if [ -f /etc/centos-release ]; then
       /vagrant/scripts/update_centos_repos.sh
     fi
